@@ -1,7 +1,7 @@
 
 function gameObject(){
 
-const object = {
+const game = {
 
     home: {
         teamName:  "Brooklyn Nets", 
@@ -109,16 +109,225 @@ const object = {
         },
     },
 }
-return object
+return game
 }
 
 
 
 function homeTeamName(){
-    let object = gameObject()
-    return object[`home`][`teamName`]
+    let game = gameObject()
+    return game[`home`][`teamName`]
+}
+console.log(homeTeamName())
+
+
+
+function numPointsScored(name){
+    
+    const game = gameObject()
+
+    // return home and away
+    for (let gameKey in game){
+        let teamObject = game[gameKey]
+    
+        for (let player in teamObject.players){
+            
+            if (player === name){
+                console.log(teamObject.players[name][`points`]) 
+                // return teamObject.players[name][`points`]
+            }
+        }
+
+    }
+
 
 }
 
-console.log(homeTeamName())
+function shoeSize(name){
+    const game = gameObject()
 
+    // return home and away
+    for (let gameKey in game){
+        let teamObject = game[gameKey]
+    
+        for (let player in teamObject.players){
+            
+            if (player === name){
+                console.log(teamObject.players[name][`shoe`])
+                // return teamObject.players[name][`shoe`] 
+            }
+        }
+
+    }
+}
+
+function teamColors(name){
+    const game = gameObject()
+
+    // return home and away
+    for (let gameKey in game){
+        let teamObject = game[gameKey]
+    
+        if (teamObject.teamName === name){
+                console.log(teamObject.colors); 
+                // return teamObject.colors
+        }
+    }
+
+}
+
+function teamNames(){
+    const game = gameObject()
+    const arrayNames = []
+
+    for (let gameKey in game){
+        let teamObject = game[gameKey]
+        
+        arrayNames.push(teamObject.teamName)
+        
+    }
+console.log(arrayNames);
+
+}
+
+function playerNumbers(name){
+    const game = gameObject()
+    const playerNumbers = []
+
+    for (let gameKey in game){
+        let teamObject = game[gameKey]
+        
+            for (let playerKey in teamObject.players){
+                playerNumbers.push(teamObject.players[playerKey][`number`])       
+            };        
+    }
+console.log(playerNumbers);
+}
+
+function playerStats(name){
+    const game = gameObject()
+
+    // return home and away
+    for (let gameKey in game){
+        let teamObject = game[gameKey]
+    
+        for (let player in teamObject.players){
+            
+            if (player === name){
+                console.log(teamObject.players[name]) 
+                // return teamObject.players[name][`points`]
+            }
+        }
+
+    }
+
+}
+
+function bigShoeRebounds(){
+    const game = gameObject()
+    let biggestShoeSize = 0
+    let playerBiggestShoe = ""
+    let playerRebounds = 0
+
+    // return home and away
+    for (let gameKey in game){
+        let teamObject = game[gameKey]
+    
+        for (let player in teamObject.players){
+
+            
+            if(teamObject.players[player].shoe> biggestShoeSize){
+                biggestShoeSize = teamObject.players[player].shoe
+                playerBiggestShoe = player
+                playerRebounds = teamObject.players[player].rebounds
+
+            }
+
+            //check shoe size, if bigger overwrite
+
+        }
+
+    }
+    console.log("biggest:", biggestShoeSize, "| player:", playerBiggestShoe, "| player rebounds:", playerRebounds);
+}
+
+
+function mostPointsScored(){
+    const game = gameObject()
+    let pointsScored = 0
+
+
+    // return home and away
+    for (let gameKey in game){
+        let teamObject = game[gameKey]
+    
+        for (let player in teamObject.players){    
+            
+            if(teamObject.players[player].points > pointsScored){
+                pointsScored = teamObject.players[player].points
+
+            }
+
+        }
+    }
+    console.log(pointsScored);
+}
+
+
+function winningTeam(){
+    const game = gameObject()
+    let homeTeamScore = 0
+    let awayTeamScore = 0
+
+    if (game.home){
+        
+        for (let player in game.home.players){    
+            homeTeamScore = homeTeamScore + game.home.players[player].points
+        }  
+    }  
+
+    if(game.away){
+
+        for (let player in game.away.players){    
+            awayTeamScore = awayTeamScore + game.away.players[player].points
+        }
+
+    }
+
+    console.log(homeTeamScore);
+    console.log(awayTeamScore);
+}
+
+
+function playerWithLongestName(){
+    const game = gameObject()
+    let nameLength = 0
+    let playerName = ""
+
+
+    // return home and away
+    for (let gameKey in game){
+        let teamObject = game[gameKey]
+    
+        for (let player in teamObject.players){ 
+
+            if (player.length > nameLength){
+                nameLength = player.length
+                playerName = player
+
+            }  
+        }
+    }
+    console.log("longest player name and length: ", playerName, nameLength);
+}
+
+numPointsScored("Brendan Haywood")
+shoeSize("Brendan Haywood")
+teamColors("Brooklyn Nets")
+teamNames()
+playerNumbers()
+playerStats("Alan Anderson")
+bigShoeRebounds()
+mostPointsScored()
+winningTeam()
+playerWithLongestName()
